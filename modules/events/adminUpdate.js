@@ -25,7 +25,7 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
             case "log:thread-admins": {
                 if (logMessageData.ADMIN_EVENT == "add_admin") {
                     dataThread.adminIDs.push({ id: logMessageData.TARGET_ID })
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`لقد قام {name} بي「 اضافة ادمن 」`, threadID, async (error, info) => {
+                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`لقد قام ${name} بي「 اضافة ادمن 」`, threadID, async (error, info) => {
                         if (global.configModule[this.config.name].autoUnsend) {
                             await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
                             return api.unsendMessage(info.messageID);
@@ -34,7 +34,7 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
                 }
                 else if (logMessageData.ADMIN_EVENT == "remove_admin") {
                     dataThread.adminIDs = dataThread.adminIDs.filter(item => item.id != logMessageData.TARGET_ID);
-                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`لقد قام {name}بي 「 ازالة ادمن 」`, threadID, async (error, info) => {
+                    if (global.configModule[this.config.name].sendNoti) api.sendMessage(`لقد قام ${name}بي 「 ازالة ادمن 」`, threadID, async (error, info) => {
                         if (global.configModule[this.config.name].autoUnsend) {
                             await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
                             return api.unsendMessage(info.messageID);
@@ -72,7 +72,7 @@ module.exports.run = async function ({ event, api, Threads,Users }) {
                 dataThread.nicknames[logMessageData.participant_id] = logMessageData.nickname;
                 if (typeof global.configModule["nickname"] != "undefined" && !global.configModule["nickname"].allowChange.includes(threadID) && !dataThread.adminIDs.some(item => item.id == event.author) || event.author == api.getCurrentUserID()) return;
                 if (global.configModule[this.config.name].sendNoti) api.sendMessage(`↲✦ 『 اشعار 』 ✦↳ \n 
-ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁટૂૂઁૂઁૂૂઁૂઁૂઁૂઁ \n ====================== \n لقد قام {name} \n ====================== \n
+ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁટૂૂઁૂઁૂૂઁૂઁૂઁૂઁ \n ====================== \n لقد قام ${name} \n ====================== \n
  \n ====================== \n بي تغير كنية ${logMessageData.participant_id} \n ====================== \n إلى: ${(logMessageData.nickname.length == 0) ? "original name": logMessageData.nickname}\n ====================== `, threadID, async (error, info) => {
                     if (global.configModule[this.config.name].autoUnsend) {
                         await new Promise(resolve => setTimeout(resolve, global.configModule[this.config.name].timeToUnsend * 1000));
