@@ -75,11 +75,11 @@ module.exports.run = async function({ api, event, Users, Threads }) {
             memLength.sort((a, b) => a - b);
 
             let msg = (typeof threadData.customJoin == "undefined") ? 
-                ` ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁ『تحديث』ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁ\n======================\nانضم {name} ايلا {threadName}\n======================\n『{name}』 هوا العضو \n رقم 『{soThanhVien}』\n في 『{threadName}』\n======================\n \n{type}` : threadData.customJoin;
+                ` ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁડૂઁ『تحديث』ટૂૂઁૂઁૂૂઁૂઁૂઁૂઁૂૂઁૂઁ\n======================\nانضم {name} ايلا {threadName}\n======================\n『${name}』 هوا العضو \n رقم 『{soThanhVien}』\n في 『{threadName}』\n======================\n \n{type}` : threadData.customJoin;
 
             msg = msg
                 .replace(/\{name}/g, nameArray.join(', '))
-                .replace(/\{type}/g, (memLength.length > 1)'✧*⁠｡⁠  اوريو مستعد لخدمتكم✧⁠*⁠':'اهلا بك في المجموعة')
+                .replace(/\{type}/g, (memLength.length > 1) ? '✧*⁠｡⁠  اوريو مستعد لخدمتكم✧⁠*⁠' : 'اهلا بك في المجموعة')
                 .replace(/\{soThanhVien}/g, memLength.join(', '))
                 .replace(/\{threadName}/g, threadName);
 
